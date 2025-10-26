@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class Quizz {
+public class Quiz {
 	private Long id;
 	private String name;
 	private Long categoryId;
