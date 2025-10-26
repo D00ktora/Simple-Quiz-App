@@ -2,6 +2,7 @@ package quizzApp.repository;
 
 import lombok.Data;
 import org.springframework.stereotype.Service;
+import quizzApp.model.Category;
 import quizzApp.model.Quiz;
 
 import java.util.ArrayList;
@@ -14,17 +15,13 @@ public class QuizRepository {
 	private List<Quiz> quizzes = new ArrayList<>();
 	private Long idCounter = 1L;
 
-	public Quiz addQuiz(Quiz quiz) {
+	public Quiz addQuiz(Quiz quiz, Category category) {
 
 		for (Quiz quizFromRepo : quizzes) {
 			if (quizFromRepo.getId().equals(quiz.getId())) {
-				quizzes.remove(quizFromRepo);
-				quizzes.add(quiz);
-				return quiz;
+				return updateQuiz(quiz, category, quizFromRepo);
 			} else if (quizFromRepo.getName().equals(quiz.getName())) {
-				quiz.setId(quizFromRepo.getId());
-				quizzes.remove(quizFromRepo);
-				quizzes.add(quiz);
+				return updateQuiz(quiz, category, quizFromRepo);
 			}
 		}
 
@@ -34,6 +31,18 @@ public class QuizRepository {
 			idCounter++;
 		}
 		return quiz;
+	}
+
+	private Quiz updateQuiz(Quiz quiz, Category category, Quiz quizFromRepo) {
+		Quiz updatedQuiz = new Quiz();
+		updatedQuiz.setId(quizFromRepo.getId());
+		updatedQuiz.setName(quiz.getName());
+		updatedQuiz.setCategoryId(category.getId());
+		updatedQuiz.setNumberOfQuestions(quiz.getNumberOfQuestions());
+		updatedQuiz.setQuestions(quiz.getQuestions());
+		quizzes.remove(quizFromRepo);
+		quizzes.add(updatedQuiz);
+		return updatedQuiz;
 	}
 
 	public Optional<Quiz> findQuizById(Long id) {

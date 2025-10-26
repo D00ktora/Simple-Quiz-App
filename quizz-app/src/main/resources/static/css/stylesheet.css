@@ -1,0 +1,34 @@
+body {
+    min-height: 100vh;
+}
+
+.header-background {
+    background-image: url("/images/banner-1090829_1920.jpg"); /* your image path */
+    background-size: cover;        /* make image fill the div */
+    background-position: left;   /* center the image */
+    background-repeat: repeat;  /* prevent tiling */
+    height: 150px;                 /* adjust as needed */
+    display: flex;                 /* so you can center text inside */
+    justify-content: center;       /* horizontally center text */
+    align-items: center;           /* vertically center text */
+    border-radius: 0 0 15px 15px;  /* match your rounded-bottom */
+    position: relative;
+
+}
+
+.header-background::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4); /* dark overlay for better contrast */
+    z-index: 2;
+}
+
+.quizHeader {
+    position: relative;
+    color: rgba(0, 0, 0, 0.42);
+    z-index: 3;                   /* ensures header text is above overlay */
+    font-size: 8rem;
+    font-weight: bold;
+}
+

@@ -14,26 +14,42 @@ public class QuestionRepository {
 	private List<Question> questions = new ArrayList<>();
 	private Long questionIdCounter = 1L;
 
-	public Question addQuestion(Question question) {
+	public Question addQuestion(Question question, Long quizId) {
 
 		for (Question questionFromRepo : questions) {
 			if (questionFromRepo.getId().equals(question.getId())) {
-				questions.remove(questionFromRepo);
-				questions.add(question);
-				return question;
+				return updateQuestion(question, questionFromRepo);
 			} else if (questionFromRepo.getDescription().equals(question.getDescription())) {
-				question.setId(questionFromRepo.getId());
-				questions.remove(questionFromRepo);
-				questions.add(question);
+				return updateQuestion(question, questionFromRepo);
 			}
 		}
 
 		if (question.getId() == null) {
-			question.setId(questionIdCounter);
-			questions.add(question);
-			questionIdCounter++;
+			return createQuestion(question, quizId);
 		}
-		return question;
+		return questions.stream().filter(question1 -> question1.getId().equals(questionIdCounter - 1)).findFirst().get();
+	}
+
+	private Question createQuestion(Question question, Long quizId) {
+		Question newQuestion = new Question();
+		newQuestion.setId(questionIdCounter);
+		questionIdCounter++;
+		newQuestion.setDescription(question.getDescription());
+		newQuestion.setQuizId(quizId);
+		newQuestion.setAnswers(question.getAnswers());
+		questions.add(newQuestion);
+		return newQuestion;
+	}
+
+	private Question updateQuestion(Question question, Question questionFromRepo) {
+		Question updatedQuestion = new Question();
+		updatedQuestion.setId(questionFromRepo.getId());
+		updatedQuestion.setQuizId(questionFromRepo.getQuizId());
+		updatedQuestion.setDescription(questionFromRepo.getDescription());
+		updatedQuestion.setAnswers(question.getAnswers());
+		questions.remove(questionFromRepo);
+		questions.add(updatedQuestion);
+		return updatedQuestion;
 	}
 
 	public Optional<Question> findQuestionById(Long id) {

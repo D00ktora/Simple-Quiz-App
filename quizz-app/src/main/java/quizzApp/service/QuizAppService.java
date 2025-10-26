@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import quizzApp.model.Category;
 import quizzApp.model.DTO.QuizDTO;
+import quizzApp.model.DTO.ResultDTO;
 import quizzApp.model.Question;
 import quizzApp.model.Quiz;
 import quizzApp.repository.CategoryRepository;
@@ -14,7 +15,9 @@ import quizzApp.repository.QuestionRepository;
 import quizzApp.repository.QuizRepository;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -26,26 +29,15 @@ public class QuizAppService {
 	private final QuestionRepository questionRepository;
 
 	public Quiz createQuiz(Quiz quiz, Category category, List<Question> questions) {
+		Quiz createdQuiz = quizRepository.addQuiz(quiz, category);
 		categoryRepository.addCategory(category);
 		for (Question question : questions) {
-			questionRepository.addQuestion(question);
+			questionRepository.addQuestion(question, createdQuiz.getId());
 		}
-		return quizRepository.addQuiz(quiz);
-	}
-
-	public Quiz updateQuiz(Quiz quiz) {
-		Quiz newQuiz = new Quiz();
-		newQuiz.setId(quiz.getId());
-		newQuiz.setName(quiz.getName());
-		newQuiz.setCategoryId(quiz.getCategoryId());
-		for (Question question : quiz.getQuestions()) {
-			questionRepository.addQuestion(question);
-		}
-		Long size = (long) questionRepository.findAllQuestionsByQuizId(quiz.getId()).size();
-		newQuiz.setNumberOfQuestions(size);
 		List<Question> allQuestionsByQuizId = questionRepository.findAllQuestionsByQuizId(quiz.getId());
-		newQuiz.setQuestions(allQuestionsByQuizId);
-		return quizRepository.addQuiz(newQuiz);
+		createdQuiz.setQuestions(allQuestionsByQuizId);
+		categoryRepository.addCategory(category);
+		return quizRepository.addQuiz(createdQuiz, category);
 	}
 
 	public Quiz getQuizById(Long id) throws Exception {
@@ -84,28 +76,61 @@ public class QuizAppService {
 		throw new Exception("File format is not supported");
 	}
 
+	//todo this method is vert bad written, its need to be changed if time left.
 	private List<Quiz> createQuizzesFromJson(MultipartFile json) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		List<QuizDTO> quizzesFromJson = mapper.readValue(json.getInputStream(), new TypeReference<List<QuizDTO>>() {
 		});
 		for (QuizDTO quiz : quizzesFromJson) {
-			Category category = new Category();
-			category.setId(quiz.getCategoryId());
-			category.setName(quiz.getName());
-			List<Question> questions = quiz.getQuestions();
-			for (Question question : questions) {
-				questionRepository.addQuestion(question);
+			Optional<Category> categoryById = categoryRepository.findCategoryById(quiz.getCategoryId());
+			if (categoryById.isEmpty()) {
+				Category category = new Category();
+				category.setId(quiz.getCategoryId());
+				category.setName(quiz.getCategoryName());
+				categoryRepository.addCategory(category);
 			}
-			Quiz newQuiz = new Quiz();
-			newQuiz.setId(quiz.getId());
-			newQuiz.setName(quiz.getName());
-			newQuiz.setCategoryId(category.getId());
-			Quiz createdQuiz = createQuiz(newQuiz, category, questions);
-			createdQuiz.setQuestions(questionRepository.findAllQuestionsByQuizId(newQuiz.getId()));
-			createdQuiz.setNumberOfQuestions((long) questionRepository.findAllQuestionsByQuizId(newQuiz.getId()).size());
-			quizRepository.addQuiz(createdQuiz);
+			Category category = categoryRepository.findCategoryByName(quiz.getCategoryName()).orElse(null);
+			Quiz newQuizFromDTO = new Quiz();
+			newQuizFromDTO.setId(quiz.getId());
+			newQuizFromDTO.setCategoryId(category.getId());
+			newQuizFromDTO.setNumberOfQuestions((long) quiz.getQuestions().size());
+			newQuizFromDTO.setQuestions(quiz.getQuestions());
+			newQuizFromDTO.setName(quiz.getName());
+			createQuiz(newQuizFromDTO, category, quiz.getQuestions());
 		}
 		return quizRepository.getQuizzes();
 	}
 
+	public ResultDTO evaluateSubmit(Map<String, String> answers) {
+		ResultDTO resultDTO = new ResultDTO();
+		int counter = 0;
+//		for (String questionId : answers.keySet()) {
+//			Optional<Question> question = questionRepository.findQuestionById(Long.valueOf(questionId));
+//			Optional<Quiz> quiz = quizRepository.findQuizById(question.get().getQuizId());
+//			resultDTO.setQuizName(quiz.get().getName());
+//			Boolean result = question.get().getAnswers().get(question.);
+//			if (result) {
+//				counter++;
+//			}
+//		}
+
+		for (Map.Entry<String, String> answer : answers.entrySet()) {
+			Optional<Question> question = questionRepository.findQuestionById(Long.valueOf(answer.getKey()));
+			Optional<Quiz> quiz = quizRepository.findQuizById(question.get().getQuizId());
+			resultDTO.setQuizName(quiz.get().getName());
+			resultDTO.setQuizId(quiz.get().getId());
+			Boolean result = question.get().getAnswers().get(answer.getValue());
+			if (result) {
+				counter++;
+			}
+		}
+
+		resultDTO.setNumberOfCorrectAnswers(String.valueOf(counter));
+		if (counter == 5) {
+			resultDTO.setResult("Success");
+		} else {
+			resultDTO.setResult("Failed - You have " + counter + " correct answers");
+		}
+		return resultDTO;
+	}
 }
