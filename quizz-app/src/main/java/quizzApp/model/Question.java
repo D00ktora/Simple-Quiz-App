@@ -8,6 +8,6 @@ import java.util.Map;
 public class Question {
 	private Long id;
 	private String description;
-	private Long categoryId;
+	private Long quizId;
 	private Map<String, Boolean> answers;
 }
