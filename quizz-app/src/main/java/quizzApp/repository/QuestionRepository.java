@@ -4,23 +4,36 @@ import lombok.Data;
 import org.springframework.stereotype.Service;
 import quizzApp.model.Question;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Data
 @Service
 public class QuestionRepository {
-	private List<Question> questions;
+	private List<Question> questions = new ArrayList<>();
 	private Long questionIdCounter = 1L;
 
 	public Question addQuestion(Question question) {
+
+		for (Question questionFromRepo : questions) {
+			if (questionFromRepo.getId().equals(question.getId())) {
+				questions.remove(questionFromRepo);
+				questions.add(question);
+				return question;
+			} else if (questionFromRepo.getDescription().equals(question.getDescription())) {
+				question.setId(questionFromRepo.getId());
+				questions.remove(questionFromRepo);
+				questions.add(question);
+			}
+		}
+
 		if (question.getId() == null) {
 			question.setId(questionIdCounter);
 			questions.add(question);
 			questionIdCounter++;
 		}
-		//todo: Check -> this null is not ok, on late state I will see what can be return instead of null
-		return null;
+		return question;
 	}
 
 	public Optional<Question> findQuestionById(Long id) {
