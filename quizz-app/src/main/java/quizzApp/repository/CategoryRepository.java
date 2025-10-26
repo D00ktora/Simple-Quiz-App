@@ -15,14 +15,25 @@ public class CategoryRepository {
 	private Long idCounter = 1L;
 
 	public Category addCategory(Category category) {
+
+		for (Category categoryFromRepo : categories) {
+			if (categoryFromRepo.getId().equals(category.getId())) {
+				categories.remove(categoryFromRepo);
+				categories.add(category);
+				return category;
+			} else if (categoryFromRepo.getName().equals(category.getName())) {
+				category.setId(categoryFromRepo.getId());
+				categories.remove(categoryFromRepo);
+				categories.add(category);
+			}
+		}
+
 		if (category.getId() == null) {
 			category.setId(idCounter);
 			categories.add(category);
 			idCounter++;
-			return category;
 		}
-		//todo: Check -> this null is not ok, on late state I will see what can be return instead of null
-		return null;
+		return category;
 	}
 
 	public Optional<Category> findCategoryById(Long id) {
