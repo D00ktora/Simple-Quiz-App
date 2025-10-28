@@ -16,6 +16,7 @@ import quizzApp.repository.QuizRepository;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -103,17 +104,8 @@ public class QuizAppService {
 
 	public ResultDTO evaluateSubmit(Map<String, String> answers) {
 		ResultDTO resultDTO = new ResultDTO();
+		Map<String, String> wrongAnswers = new HashMap<>();
 		int counter = 0;
-//		for (String questionId : answers.keySet()) {
-//			Optional<Question> question = questionRepository.findQuestionById(Long.valueOf(questionId));
-//			Optional<Quiz> quiz = quizRepository.findQuizById(question.get().getQuizId());
-//			resultDTO.setQuizName(quiz.get().getName());
-//			Boolean result = question.get().getAnswers().get(question.);
-//			if (result) {
-//				counter++;
-//			}
-//		}
-
 		for (Map.Entry<String, String> answer : answers.entrySet()) {
 			Optional<Question> question = questionRepository.findQuestionById(Long.valueOf(answer.getKey()));
 			Optional<Quiz> quiz = quizRepository.findQuizById(question.get().getQuizId());
@@ -122,14 +114,23 @@ public class QuizAppService {
 			Boolean result = question.get().getAnswers().get(answer.getValue());
 			if (result) {
 				counter++;
+			} else {
+				for (Map.Entry<String, Boolean> answersFromQuestion : question.get().getAnswers().entrySet()) {
+					if (answersFromQuestion.getValue().equals(true)) {
+						String description = question.get().getDescription();
+						String correctAnswer = answersFromQuestion.getKey();
+						wrongAnswers.put(description, correctAnswer);
+						break;
+					}
+				}
 			}
 		}
-
+		resultDTO.setWrongAnswers(wrongAnswers);
 		resultDTO.setNumberOfCorrectAnswers(String.valueOf(counter));
 		if (counter == 5) {
 			resultDTO.setResult("Success");
 		} else {
-			resultDTO.setResult("Failed - You have " + counter + " correct answers");
+			resultDTO.setResult("Failed: You have " + counter + " correct answers");
 		}
 		return resultDTO;
 	}

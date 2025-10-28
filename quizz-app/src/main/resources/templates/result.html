@@ -20,6 +20,19 @@
     <h2 class="mb-4 text-light" th:utext="${result.quizName} + '<br>'">Quiz Name</h2>
     <h2 class="mb-4 text-light" th:utext="${result.result} + '<br>'">Result</h2>
 </div>
+
+<div class="container mt-4 container text-center" th:if="${!#maps.isEmpty(result.wrongAnswers)}">
+    <h1 class="text-warning">Wrong Question with correct answers are:</h1>
+</div>
+
+<div class="col" th:each="answer : ${result.wrongAnswers.entrySet()}">
+    <div class="card text-bg-danger mb-3">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${answer.key}">Description</h5>
+            <p class="card-text" th:text="${answer.value} + ' questions'">0 questions</p>
+        </div>
+    </div>
+</div>
 <div class="text-center mt-4 mb-4">
     <a class="btn btn-primary btn-lg px-5 py-2" style="width: 200px;" th:href="@{/quiz/{id}(id=${result.quizId})}">
         Retake

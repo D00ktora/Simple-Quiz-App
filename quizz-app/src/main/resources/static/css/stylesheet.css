@@ -28,7 +28,7 @@ body {
     position: relative;
     color: rgba(0, 0, 0, 0.42);
     z-index: 3;                   /* ensures header text is above overlay */
-    font-size: 8rem;
+    font-size: 7rem;
     font-weight: bold;
 }
 
