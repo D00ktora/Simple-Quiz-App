@@ -20,6 +20,14 @@
     <h2 class="mb-4 text-light" th:text="${quizDTO.name}">Available Quizzes</h2>
 </div>
 
+<div class="text-center mb-4 sticky-top bg-secondary py-2" style="z-index: 1000;">
+    <div class="progress mx-auto">
+        <div id="progressBar" class="progress-bar bg-success" style="width: 0%;">
+            0%
+        </div>
+    </div>
+</div>
+
 <form class="container mt-5" th:action="@{/quiz/submit}" method="post" th:object="${quizDTO}">
     <div class="row justify-content-center">
         <div class="col-md-8" th:each="question : ${quizDTO.questions}">
@@ -28,7 +36,7 @@
                         <h5 th:text="${question.description}">Question text</h5>
                         <div th:each="entry : ${question.answers.entrySet()}">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio"
+                                <input class="form-check-input answer-radio" type="radio"
                                     th:name="${question.id}"
                                     th:id="'q' + ${question.id} + '_' + ${entry.key.hashCode()}"
                                     th:value="${entry.key}">
@@ -48,7 +56,23 @@
     </div>
 </form>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const radios = document.querySelectorAll(".answer-radio");
+        const totalQuestions = new Set([...radios].map(r => r.name)).size;
+        const answered = new Set();
+        const bar = document.getElementById("progressBar");
 
+        radios.forEach(r => {
+            r.addEventListener("change", () => {
+                answered.add(r.name);
+                const percent = Math.round((answered.size / totalQuestions) * 100);
+                bar.style.width = percent + "%";
+                bar.textContent = percent + "%";
+            });
+        });
+    });
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
