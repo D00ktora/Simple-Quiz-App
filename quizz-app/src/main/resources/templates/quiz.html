@@ -20,14 +20,12 @@
     <h2 class="mb-4 text-light" th:text="${quizDTO.name}">Available Quizzes</h2>
 </div>
 
-<div class="text-center mb-4 sticky-top bg-secondary py-2" style="z-index: 1000;">
-    <div class="progress mx-auto">
-        <div id="progressBar" class="progress-bar bg-success" style="width: 0%;">
-            0%
-        </div>
+<div class="sticky-top bg-white text-secondary py-2 d-flex justify-content-between align-items-center px-4 border-bottom shadow-sm" style="z-index: 1100;">
+    <div><h5 class="mb-0">⏳ Time remaining: <span id="timer" class="fw-bold">02:00</span></h5></div>
+    <div class="progress" style="width: 50%; height: 20px;">
+        <div id="progressBar" class="progress-bar bg-success" style="width: 0%;">0%</div>
     </div>
 </div>
-
 <form class="container mt-5" th:action="@{/quiz/submit}" method="post" th:object="${quizDTO}">
     <div class="row justify-content-center">
         <div class="col-md-8" th:each="question : ${quizDTO.questions}">
@@ -73,6 +71,31 @@
         });
     });
 </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const totalTime = 2 * 60;
+        let timeLeft = totalTime;
+
+        const timerDisplay = document.getElementById("timer");
+        const form = document.querySelector("form");
+
+        const timer = setInterval(() => {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                alert("Time is up! Submitting your answers...");
+                form.submit();
+            }
+
+            timeLeft--;
+        }, 1000);
+    });
+</script>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
