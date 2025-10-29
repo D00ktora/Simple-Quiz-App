@@ -16,10 +16,61 @@
         <h1 class="quizHeader" th:text="#{title}"></h1>
     </div>
 </div>
-<div class="container mt-4 container text-center ">
-    <form th:action="@{/create/json}" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" accept=".json">
-        <button type="submit">Upload Quizzes</button>
+<div class="container mt-4 container text-center">
+    <form id="questionForm" class="d-flex align-content-center flex-wrap" th:action="@{/create/question}" method="post" th:object="${singleQuestion}">
+        <div class="mb-3 col-6 px-3">
+            <label for="description" class="form-label">Question</label>
+            <input type="text" class="form-control" id="description" name="description" th:field="*{description}">
+            <div id="descriptionHelper" class="form-text">Input question description</div>
+        </div>
+        <div class="mb-3 col-6 px-3">
+            <label for="quizName" class="form-label">Quiz Name</label>
+            <input type="text" class="form-control" id="quizName" name="quizName" th:field="*{quizName}">
+            <div id="quizNameHelper" class="form-text">Input selected quiz name</div>
+        </div>
+        <div class="mb-3 col-6 px-3">
+            <label for="categoryName" class="form-label">Category Name</label>
+            <input type="text" class="form-control" id="categoryName" name="categoryName" th:field="*{categoryName}">
+            <div id="categoryNameHelper" class="form-text">Input selected category name</div>
+        </div>
+        <div class="mb-3 col-6 px-3">
+            <label for="firstAnswer" class="form-label">Answer 1:</label>
+            <input type="text" class="form-control" id="firstAnswer" name="firstAnswer" th:field="*{firstAnswer}">
+            <div id="firstAnswerHelper" class="form-text">Input first answer</div>
+        </div>
+        <div class="mb-3 col-6 px-3">
+            <label for="secondAnswer" class="form-label">Answer 2:</label>
+            <input type="text" class="form-control" id="secondAnswer" name="secondAnswer" th:field="*{secondAnswer}">
+            <div id="secondAnswerHelper" class="form-text">Input second answer</div>
+        </div>
+        <div class="mb-3 col-6 px-3">
+            <label for="thirdAnswer" class="form-label">Answer 3:</label>
+            <input type="text" class="form-control" id="thirdAnswer" name="thirdAnswer" th:field="*{thirdAnswer}">
+            <div id="thirdAnswerHelper" class="form-text">Input third answer</div>
+        </div>
+        <div class="mb-3 col-6 px-3">
+            <label for="forthAnswer" class="form-label">Answer 4:</label>
+            <input type="text" class="form-control" id="forthAnswer" name="forthAnswer" th:field="*{forthAnswer}">
+            <div id="forthAnswerHelper" class="form-text">Input forth answer</div>
+        </div>
+        <div class="mb-3 col-6 px-3">
+            <label for="correctAnswer" class="form-label">Correct Answer</label>
+            <input type="text" class="form-control" id="correctAnswer" name="correctAnswer" th:field="*{correctAnswer}">
+            <div id="correctAnswerHelper" class="form-text">Input correct answer</div>
+        </div>
+        <div class="col-12 px-5">
+        <button type="submit" class="btn btn-primary col-5">Submit Question</button>
+        </div>
+    </form>
+</div>
+<div class="container mt-4 container text-center">
+    <form id="fileForm" class="d-flex align-content-center flex-wrap" th:action="@{/create/json}" method="post" enctype="multipart/form-data">
+    <div class="mb-3 col-12 px-3">
+        <label for="formFile" class="form-label">Upload Quiz from .json file</label><br>
+        <label for="formFile" class="form-label">This field accept only .json files</label>
+        <input class="form-control col-12" type="file" id="formFile" name="file" accept=".json">
+        <button type="submit" class="btn btn-primary col-5 mt-4">Submit File</button>
+    </div>
     </form>
 </div>
 

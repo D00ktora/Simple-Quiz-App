@@ -28,7 +28,9 @@
 
 ## End-Points:
 - #### http://localhost:8080/ - Home page.
-- #### http://localhost:8080/create/json - Create Quizzes from Json file.
+- #### http://localhost:8080/create - Create Quizzes from form or JSON file.
+- #### http://localhost:8080/create/json - Add JSON file and create quizzes from it. This end-point do not work without file. With other words use form to upload file.
+- #### http://localhost:8080/create/question - Add a question and create quiz if not exist from Form input. Only work when submit from the /create end-point.
 - #### http://localhost:8080/quiz/{id} - (Before using this end point upload quizzes) Navigate to quiz with inputted id.
 - #### http://localhost:8080/quiz/result - Result page. That is available when you finish the quiz.
 - #### http://localhost:8080/?lang=bg - Pick bulgarian language.
