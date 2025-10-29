@@ -18,22 +18,32 @@ public class CategoryRepository {
 
 		for (Category categoryFromRepo : categories) {
 			if (categoryFromRepo.getId().equals(category.getId())) {
-				categories.remove(categoryFromRepo);
-				categories.add(category);
-				return category;
+				return getUpdatedCategory(category, categoryFromRepo);
 			} else if (categoryFromRepo.getName().equals(category.getName())) {
-				category.setId(categoryFromRepo.getId());
-				categories.remove(categoryFromRepo);
-				categories.add(category);
+				return getUpdatedCategory(category, categoryFromRepo);
 			}
 		}
 
 		if (category.getId() == null) {
-			category.setId(idCounter);
-			categories.add(category);
-			idCounter++;
+			return createCategory(category);
 		}
-		return category;
+		return categories.stream().filter(categoryFromRepo -> categoryFromRepo.getId().equals(idCounter - 1)).findFirst().get();
+	}
+
+	private Category createCategory(Category category) {
+		Category newCategory = new Category();
+		newCategory.setId(idCounter++);
+		newCategory.setName(category.getName());
+		newCategory.setQuestionIds(category.getQuestionIds());
+		categories.add(newCategory);
+		return newCategory;
+	}
+
+	private Category getUpdatedCategory(Category category, Category categoryFromRepo) {
+		category.setId(categoryFromRepo.getId());
+		categories.remove(categoryFromRepo);
+		categories.add(category);
+		return categories.stream().filter(updatedCategory -> updatedCategory.getId().equals(category.getId())).findFirst().get();
 	}
 
 	public Optional<Category> findCategoryById(Long id) {

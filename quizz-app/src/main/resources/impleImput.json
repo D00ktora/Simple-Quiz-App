@@ -1,0 +1,377 @@
+[
+  {
+    "name": "Animal Quiz 1",
+    "categoryName": "Animals",
+    "questions": [
+      {
+        "description": "Three of these animals hibernate. Which one does not?",
+        "answers": {
+          "Mouse": false,
+          "Sloth": true,
+          "Frog": false,
+          "Snake": false
+        }
+      },
+      {
+        "description": "All of these animals are omnivorous except one.",
+        "answers": {
+          "Fox": false,
+          "Mouse": false,
+          "Opossum": false,
+          "Snail": true
+        }
+      },
+      {
+        "description": "Three of these Latin names are names of bears. Which is the odd one?",
+        "answers": {
+          "Melursus ursinus": false,
+          "Helarctos malayanus": false,
+          "Ursus minimus": false,
+          "Felis silvestris catus": true
+        }
+      },
+      {
+        "description": "Representatives of three of these species produce venom of their own. Which is the odd species?",
+        "answers": {
+          "Lizards": false,
+          "Scorpions": false,
+          "Frogs": false,
+          "Mosquito's": true
+        }
+      },
+      {
+        "description": "All of these animals have large ears (relative to their size) except one.",
+        "answers": {
+          "Polar bears": true,
+          "Foxes": false,
+          "Bats": false,
+          "Elephants": false
+        }
+      },
+      {
+        "description": "This percentage of all snakes on Earth are lethal to humans.",
+        "answers": {
+          "10%": false,
+          "15%": true,
+          "20%": false,
+          "25%": false
+        }
+      },
+      {
+        "description": "Snakes are this kind of animals.",
+        "answers": {
+          "Herbivorous": false,
+          "Omnivorous": false,
+          "Carnivorous": true,
+          "Vegetarian": false
+        }
+      },
+      {
+        "description": "Snakes consume their food by means of this process.",
+        "answers": {
+          "Breathing": false,
+          "Absorption": false,
+          "Swallowing": true,
+          "Chewing": false
+        }
+      },
+      {
+        "description": "Snakes belong to the following category.",
+        "answers": {
+          "Invertebrates": false,
+          "Lizards": false,
+          "Reptiles": true,
+          "Mammals": false
+        }
+      },
+      {
+        "description": "A specialist in snakes is called one of these.",
+        "answers": {
+          "Pisciculturist": false,
+          "Ornithologist": false,
+          "Ophiologist": true,
+          "Herpetologist": false
+        }
+      }
+    ]
+  },
+  {
+    "name": "Animal quiz 2",
+    "categoryName": "Animals",
+    "questions": [
+      {
+        "description": "One of the following snakes does not belong to the Viperidae family.",
+        "answers": {
+          "Horned adder": false,
+          "Grass snake": true,
+          "Viper": false,
+          "Asp": false
+        }
+      },
+      {
+        "description": "What breed is known as the favourite breed of Queen Elizabeth II?",
+        "answers": {
+          "Border Collie": false,
+          "Old English Sheepdog": false,
+          "Welsh Corgi": true,
+          "Australian Cattle Dog": false
+        }
+      },
+      {
+        "description": "What was the name of Fraisers fathers dog on the hit TV show set in Seattle?",
+        "answers": {
+          "Niles": false,
+          "Marty": true,
+          "Eddie": false,
+          "Skip": false
+        }
+      },
+      {
+        "description": "Name the rarest and most endangered of all wolves.",
+        "answers": {
+          "Red Wolf": true,
+          "Ethiopian Wolf": false,
+          "Black-backed Wolf": false,
+          "Gray Wolf": false
+        }
+      },
+      {
+        "description": "This species of great apes with long arms and reddish hair suffer habitat destruction due to logging, mining and forest fires.",
+        "answers": {
+          "Gorilla": true,
+          "Baboons": false,
+          "Orangutan": false,
+          "Chimpanzee": false
+        }
+      },
+      {
+        "description": "This small nocturnal animal, whose natural habitat are the deserts of Northern Africa, is known to jump not only for hunting or protection, but also for pleasure.",
+        "answers": {
+          "Cape Fox": false,
+          "Red Fox": false,
+          "Bengal Fox": false,
+          "Fennec": true
+        }
+      },
+      {
+        "description": "Which of these animals swims the fastest?\n",
+        "answers": {
+          "Flounder": false,
+          "Shark": false,
+          "Dolphin": true,
+          "Jellyfish": false
+        }
+      },
+      {
+        "description": "Which word refers to the sound peacocks make?",
+        "answers": {
+          "Scream": true,
+          "Squill": false,
+          "Squeak": false,
+          "Squall": false
+        }
+      },
+      {
+        "description": "Ancient Japanese thought this animal caused earthquakes.",
+        "answers": {
+          "Birds": false,
+          "Spiders": true,
+          "Snakes": false,
+          "Frogs": false
+        }
+      },
+      {
+        "description": "How many types of bats are there?\n",
+        "answers": {
+          "900": true,
+          "700": false,
+          "500": false,
+          "200": false
+        }
+      }
+    ]
+  },
+  {
+    "name": "General Quiz 1",
+    "categoryName": "General",
+    "questions": [
+      {
+        "description": "This drink contains caffeine.",
+        "answers": {
+          "Mineral water": true,
+          "Orange juice": false,
+          "Coffee": false,
+          "Beer": false
+        }
+      },
+      {
+        "description": "If a TV program is rated G then this is true.",
+        "answers": {
+          "It contains moderate violence.": false,
+          "It contains mild sexual situations.": false,
+          "It is suitable for all audiences.": true,
+          "It is suitable for young children.": false
+        }
+      },
+      {
+        "description": "The theory of relativity was introduced in physics by this man.",
+        "answers": {
+          "Galileo Galilei": false,
+          "Albert Einstein": true,
+          "Archimedes": false,
+          "Isaac Newton": false
+        }
+      },
+      {
+        "description": "The symbol for the chemical element iron is this.",
+        "answers": {
+          "I": false,
+          "Fe": true,
+          "Zn": false,
+          "Br": false
+        }
+      },
+      {
+        "description": "The author of the novel A Portrait of the Artist as a Young Man is this writer.",
+        "answers": {
+          "T. S. Eliot": false,
+          "Samuel Beckett": false,
+          "William Faulkner": false,
+          "James Joyce": true
+        }
+      },
+      {
+        "description": "The capital of Mongolia is this city.",
+        "answers": {
+          "Davao": false,
+          "Islamabad": false,
+          "Quezon": false,
+          "Ulaanbaatar": true
+        }
+      },
+      {
+        "description": "Mitochondrias function in cells is to perform this.",
+        "answers": {
+          "To control chemical reactions within the cytoplasm": false,
+          "To store information needed for cellular division": false,
+          "To convert organic materials into energy": true,
+          "To process proteins targeted to the plasma membrane": false
+        }
+      },
+      {
+        "description": "The US bought Alaska in this year.",
+        "answers": {
+          "1942": false,
+          "1882": false,
+          "1854": false,
+          "1867": true
+        }
+      },
+      {
+        "description": "The 23rd US President was in office during this period.",
+        "answers": {
+          "1909 - 1913": false,
+          "1889 - 1893": true,
+          "1837 - 1841": false,
+          "1877 - 1881": false
+        }
+      },
+      {
+        "description": "One of these actors did not star in the 1971 movie A Clockwork Orange.",
+        "answers": {
+          "Michael Bates": false,
+          "Patrick Magee": false,
+          "Warren Brown": true,
+          "Malcolm McDowell": false
+        }
+      }
+    ]
+  },
+  {
+    "name": "General Quiz 2",
+    "categoryName": "General",
+    "questions": [
+      {
+        "description": "The first Bulgarian state was formed in this year.",
+        "answers": {
+          "429 AD": false,
+          "681 AD": true,
+          "712 AD": false,
+          "651 AD": false
+        }
+      },
+      {
+        "description": "The 1962 Soccer World Cup tournament was held in this country.",
+        "answers": {
+          "Switzerland": false,
+          "Mexico": false,
+          "Chile": true,
+          "Italy": false
+        }
+      },
+      {
+        "description": "The Meryas were a probably Finno-Ugric tribe who lived in the region of modern Russia. This is the first historian to mention them.",
+        "answers": {
+          "Eusebius of Caesarea": false,
+          "Jordanes": true,
+          "Priscus": false,
+          "Sima Guang": false
+        }
+      },
+      {
+        "description": "The word abacus derives from a Hebrew word, meaning this.",
+        "answers": {
+          "Movement": false,
+          "Sky": false,
+          "Dust": true,
+          "Wood": false
+        }
+      },
+      {
+        "description": "Sean Connery, George Lazenby, Roger Moore, Timothy Dalton and Pierce Brosnan have all played the role of a fictional British spy. Who was that character?",
+        "answers": {
+          "James Bond": false,
+          "Johnny English": false,
+          "Jim Malone": true,
+          "Eliot Ness": false
+        }
+      },
+      {
+        "description": "Man On The Moon, Amadeus and One Flew Over the Cuckoos Nest are all movies directed by him.",
+        "answers": {
+          "Stanley Kubrick": false,
+          "MiloÅ¡ Forman": true,
+          "Pedro AlmodÃ³var": false,
+          "Martin Scorsese": false
+        }
+      },
+      {
+        "description": "Across the Hall, Friends Like Us, Insomnia Café and Six of One are all working titles of one of famous US TV-series.  Name the series.",
+        "answers": {
+          "Friends": true,
+          "Sex and the City": false,
+          "ALF": false,
+          "One Tree Hill": false
+        }
+      },
+      {
+        "description": "The common link between these four movies -Chicken Run, Harry Potter, The Mummy Returns and Cast Away, is that...?",
+        "answers": {
+          "They all treat one and the same social problem.": false,
+          "They all are produced by one and the same company.": true,
+          "One and the same actor is starring in all of them.": false,
+          "They all refer to one and the same social class.": false
+        }
+      },
+      {
+        "description": "Three of the following movies are produced by 20th Century Fox. Which is the odd one?",
+        "answers": {
+          "Me, Myself  Irene": false,
+          "Dr. Dolittle 2": false,
+          "Cast Away": false,
+          "House of Wax": true
+        }
+      }
+    ]
+  }
+]
