@@ -36,9 +36,9 @@ public class QuizRepository {
 	private Quiz updateQuiz(Quiz quiz, Category category, Quiz quizFromRepo) {
 		Quiz updatedQuiz = new Quiz();
 		updatedQuiz.setId(quizFromRepo.getId());
-		updatedQuiz.setName(quiz.getName());
+		updatedQuiz.setName(quizFromRepo.getName());
 		updatedQuiz.setCategoryId(category.getId());
-		updatedQuiz.setNumberOfQuestions(quiz.getNumberOfQuestions());
+		updatedQuiz.setNumberOfQuestions(quizFromRepo.getNumberOfQuestions());
 		updatedQuiz.setQuestions(quiz.getQuestions());
 		quizzes.remove(quizFromRepo);
 		quizzes.add(updatedQuiz);

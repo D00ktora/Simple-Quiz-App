@@ -35,8 +35,9 @@ public class QuizAppService {
 		for (Question question : questions) {
 			questionRepository.addQuestion(question, createdQuiz.getId());
 		}
-		List<Question> allQuestionsByQuizId = questionRepository.findAllQuestionsByQuizId(quiz.getId());
+		List<Question> allQuestionsByQuizId = questionRepository.findAllQuestionsByQuizId(createdQuiz.getId());
 		createdQuiz.setQuestions(allQuestionsByQuizId);
+		createdQuiz.setNumberOfQuestions((long) allQuestionsByQuizId.size());
 		categoryRepository.addCategory(category);
 		return quizRepository.addQuiz(createdQuiz, category);
 	}
@@ -127,7 +128,7 @@ public class QuizAppService {
 		}
 		resultDTO.setWrongAnswers(wrongAnswers);
 		resultDTO.setNumberOfCorrectAnswers(String.valueOf(counter));
-		if (counter == 5) {
+		if (counter == answers.size()) {
 			resultDTO.setResult("Success");
 		} else {
 			resultDTO.setResult("Failed: You have " + counter + " correct answers");
